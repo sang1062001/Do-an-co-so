@@ -1,0 +1,98 @@
+﻿@using BanHangDienTu.Models;
+@using X.PagedList.Mvc.Common
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Products>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<br/>
+
+<div class="container">  
+    <div class="row">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="/Images/banner23.jpg" alt="" style="width:100%;">
+      </div>
+
+      <div class="item">
+        <img src="/Images/iphone13banner2.jpg" alt="" style="width:100%;">
+      </div>
+    
+      <div class="item">
+        <img src="/Images/samsungbanner2.jpg" alt="" style="width:100%;">
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  </div>
+</div>
+
+
+@*<div class="row">
+    <div class="col-md-10">
+       <img class="img-responsive" src="~/Images/banner23.jpg" />
+    </div>
+    @*<div class="col-md-2">
+        <img src="~/Images/hate2.png" class="img-responsive" alt="" />
+        <p><a class="btn btn-default" href="">xem chi tiết &raquo;</a></p>
+    </div>
+</div>*@
+<br />
+<div>
+    <img class="imgChange" src="~/Images/ban21.png" />
+    <p><a class="btn btn-default" href="">xem chi tiết &raquo;</a></p>
+</div>
+
+
+<div class="small-container">
+         <h2 class="bg-success" style="color:white">Sản phẩm của chúng tôi</h2>
+</div>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <label style="font-size: 23px;color: steelblue">@product.Name</label>
+                    </h4>
+                </div>
+                <img src="~/@product.Image" alt="Card Image" class="card-img-top" style="height: 300px;"/>
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <label style="font-size: 20px;color: #a51313"><b>Giá : @string.Format("{0:0,0}", product.Price) VNĐ</b></label>
+                        </div>
+                        <a asp-action="Detail" asp-controller="Home" asp-route-id="@product.Id" class="btn btn-success">Chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div>
+    @Html.PagedListPager(Model,c=>Href("~/Customer/Home/Index?page="+c),PagedListRenderOptionsBase.PageNumbersOnly)
+</div>
+
+
+

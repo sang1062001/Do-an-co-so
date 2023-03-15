@@ -1,0 +1,37 @@
+﻿@using BanHangDienTu.Models;
+@model IEnumerable<SpecialTag>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br/><br/>
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Danh sách Hãng</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info">&nbsp; Tên hãng mới</a>
+    </div>
+</div>
+<br/>
+<div>
+    <table class="table table-striped border">
+        <tr class="table-info">
+            <th>
+                @Html.DisplayNameFor(expression:c=>c.Name)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <partial name="_TagPageButtonPartial" model="@item.Id"/>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
